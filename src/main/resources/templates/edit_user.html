@@ -6,10 +6,14 @@
 </head>
 <body>
 <h3>Update</h3>
-<form th:method="PATCH" th:action="@{/users/update}" th:object="${user}">
+<form th:method="PATCH" th:action="@{/admin/users/update}" th:object="${user}">
     <input type="hidden" th:field="*{id}"/>
     <label for="name">Name: </label>
     <input type="text" th:field="*{name}" id="name">
+    <br/>
+    <br/>
+    <label for="password">password: </label>
+    <input type="text" th:field="*{password}" id="password">
     <br/>
     <br/>
     <label for="email">email: </label>
@@ -21,6 +25,7 @@
     <br/>
     <hr/>
     <input type="submit" value="Update user">
+    <input type="button" value="Logout" onclick="window.location.href='/logout'">
 </form>
 </body>
 </html>
