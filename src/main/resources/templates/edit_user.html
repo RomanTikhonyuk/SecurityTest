@@ -8,8 +8,8 @@
 <h3>Update</h3>
 <form th:method="PATCH" th:action="@{/admin/users/update}" th:object="${user}">
     <input type="hidden" th:field="*{id}"/>
-    <label for="name">Name: </label>
-    <input type="text" th:field="*{name}" id="name">
+    <label for="username">Name: </label>
+    <input type="text" th:field="*{username}" id="username">
     <br/>
     <br/>
     <label for="password">password: </label>
@@ -19,10 +19,7 @@
     <label for="email">email: </label>
     <input type="text" th:field="*{email}" id="email">
     <br/>
-    <br/>
-    <label for="age">Age: </label>
-    <input type="text" th:field="*{age}" id="age">
-    <br/>
+
     <hr/>
     <input type="submit" value="Update user">
     <input type="button" value="Logout" onclick="window.location.href='/logout'">

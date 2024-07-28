@@ -8,7 +8,7 @@ import java.util.Collection;
 
 @Entity
 @Data
-public class Role implements GrantedAuthority {
+public class Role  {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,13 +16,9 @@ public class Role implements GrantedAuthority {
     private long id;
 
     @Column (name = "role", unique = true)
-    private String role;
+    private String name;
 
     @ManyToMany(mappedBy = "roles")
     private Collection<User> users;
 
-    @Override
-    public String getAuthority() {
-        return "";
-    }
 }
