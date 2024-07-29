@@ -12,35 +12,25 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.security.Principal;
 import java.util.List;
 
-@Controller
-@RequestMapping()
+@RestController
+@RequestMapping("/user")
 public class UserController {
 
     private final UserService service;
-    private final RoleRepository roleRepository;
+
     @Autowired
-    public UserController(UserService service, RoleRepository roleRepository) {
+    public UserController(UserService service) {
         this.service = service;
-        this.roleRepository = roleRepository;
-    }
-    //@Secured({"ROLE_ADMIN","ROLE_USER"})
-    @GetMapping("/myuser")
-    public String updateUserForm(Model model, @RequestParam("id") Long id) {
-        model.addAttribute("user", service.findOne(id));
-        return "user_info";
-    }
-    @GetMapping("/new")
-    public String showFormAddUser(Model model) {
-        model.addAttribute("user", new User());
-        return "new_user";
     }
 
-
-    @PostMapping
-    public String addUser(@ModelAttribute("user") User user) {
-        service.save(user);
-        return "redirect:/users";
+    @GetMapping("")
+    public String info(Principal principal) {
+User user = service.findByUsername(principal.getName());
+        return "My user: " + user.getUsername() + user.getEmail() + user.getPassword() + user.getRoles();
     }
+
 }
+

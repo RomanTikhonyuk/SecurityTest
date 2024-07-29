@@ -20,15 +20,13 @@ import java.util.Optional;
 public class UserService  {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
-    private final PasswordEncoder passwordEncoder;
+
 
     @Autowired
-    public UserService(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
-        this.passwordEncoder = passwordEncoder;
     }
+
 
     public List<User> findAll() {
         return userRepository.findAll();
@@ -38,7 +36,10 @@ public class UserService  {
         Optional<User> foundUser = userRepository.findById(id);
         return foundUser.orElse(null);
     }
-
+    public User findByUsername(String username) {
+        User foundUser = userRepository.findByUsername(username);
+        return foundUser;
+    }
     public void save(User user) {
 
         userRepository.save(user);
