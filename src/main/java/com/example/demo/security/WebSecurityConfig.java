@@ -32,20 +32,6 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain configure(HttpSecurity http) throws Exception {
-//        http.authorizeHttpRequests(auth -> auth
-//                        .requestMatchers("/").hasAnyAuthority("USER","ADMIN")
-//                        .requestMatchers("/new").hasAnyAuthority("ADMIN", "USER")
-//                        .requestMatchers("/edit/**").hasAnyAuthority("ADMIN", "USER")
-//                        .requestMatchers("/delete/**", "/admin/users").hasAuthority("ADMIN")
-//                        .requestMatchers("/welcome/**","/registration").permitAll()
-//                        .anyRequest().authenticated()
-//                )
-//                .formLogin(login -> login.permitAll())
-//                .logout(logout -> logout.permitAll())
-//                .exceptionHandling(eh -> eh.accessDeniedPage("/403"))
-//        ;
-
-
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/").permitAll()
                         .requestMatchers("/user/**").hasAnyAuthority("ADMIN", "USER")

@@ -20,11 +20,12 @@ import java.util.Optional;
 public class UserService  {
 
     private final UserRepository userRepository;
-
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
 
@@ -41,13 +42,14 @@ public class UserService  {
         return foundUser;
     }
     public void save(User user) {
-
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
-    public void update(Long id, User updatedUser) {
-        updatedUser.setId(id);
-        userRepository.save(updatedUser);
+    public void update(Long id, User user) {
+        user.setId(id);
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
     }
 
     public void delete(Long id) {
